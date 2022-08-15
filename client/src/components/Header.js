@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
+import { ConnectKitButton } from "connectkit";
 
 const Header = () => {
 
@@ -10,9 +10,9 @@ const Header = () => {
             <Container>
                 <Navbar.Brand className="Brand" href="#home">PLZNFT.ME</Navbar.Brand>
                 <Nav className="justify-content-end">
-                    <Nav.Link href="#list">Pending List</Nav.Link>
                     <Nav.Link href="#about">WTF is this?</Nav.Link>
-                    <Button variant="secondary">Connect Wallet</Button>
+                    <Nav.Link href="#list">Queue</Nav.Link>
+                    <ConnectKitButton />
                 </Nav>
             </Container>
         </Navbar>
