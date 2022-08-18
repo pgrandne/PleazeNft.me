@@ -102,6 +102,7 @@ const HomePage = () => {
                         <Col sm={2}>
                             <Form.Control
                                 placeholder="USDT"
+                                type="number"
                                 onChange={(e) => { setAmount(e.target.value) }}
                                 value={amount}
                             />

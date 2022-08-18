@@ -8,14 +8,14 @@ const TotalPosition = () => {
     const [total, setTotal] = useState('0');
 
     const contract = "0x1aD037Edc7758114FC80753DA2DBF246e14AdaED"
-    const { data, isLoading, isSuccess } = useContractRead({
+    const { data, isSuccess } = useContractRead({
         addressOrName: contract,
         contractInterface: ABI,
         functionName: 'getAllRequests()',
     })
 
     useEffect(() => {
-        setTotal(data.length)
+        setTotal(data.length + 1)
     }, [])
 
     return (

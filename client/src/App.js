@@ -37,7 +37,7 @@ const App = () => {
             <Route path="queue" element={<QueuePage />} />
           </Routes>
           <Footer />
-        </div >
+        </div>
       </ConnectKitProvider>
     </WagmiConfig >
 
