@@ -1,15 +1,15 @@
 import './App.css';
 import Header from './components/Header';
-import HomePage from './components/HomePage';
-import WtfPage from './components/WtfPage';
-import QueuePage from './components/QueuePage';
+import HomePage from './pages/HomePage';
+import WtfPage from './pages/WtfPage';
+import QueuePage from './pages/QueuePage';
 import Footer from './components/Footer';
 import { WagmiConfig, createClient, chain } from "wagmi";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
 import { Buffer } from "buffer";
 import { Route, Routes } from 'react-router-dom';
 
-const alchemyId = process.env.ALCHEMY_ID;
+const alchemyId = process.env.REACT_APP_ALCHEMY_ID;
 
 const chains = [chain.polygonMumbai];
 
