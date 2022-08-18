@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
@@ -6,36 +7,58 @@ import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 import NftList from "./NftList";
+import 'react-toastify/dist/ReactToastify.css';
 
+import { useAccount, usePrepareSendTransaction, useSendTransaction } from 'wagmi'
+import { ethers } from 'ethers'
 
 const HomePage = () => {
-    const [PriceModal, setPriceModal] = useState(false);
-    const [PictureModal, setPictureModal] = useState(false);
+    const [wrongPriceModal, setWrongPriceModal] = useState(false);
+    const [pictureModal, setPictureModal] = useState(false);
+    const [notConnectedModal, setNotConnectedModal] = useState(false);
+    const [amount, setAmount] = useState('');
 
-    let askingPrice = 0
     let url = ""
+    let listPosition = 1
+    let totalNFT = 1
 
-    const handlePrice = (event) => { askingPrice = event.target.value }
+    const { isConnected } = useAccount()
 
     const handleUrl = (event) => { url = event.target.value }
 
     const handleClose = () => {
-        setPriceModal(false)
+        setWrongPriceModal(false)
         setPictureModal(false)
+        setNotConnectedModal(false)
     }
 
     const handleBuy = () => {
-        if (askingPrice < 5) {
-            setPriceModal(true)
-        }
-        else
-            setPictureModal(true)
+        if (isConnected) {
+            if (amount < 0.01) setWrongPriceModal(true)
+            else setPictureModal(true)
+        } else setNotConnectedModal(true)
     }
 
-    const handleSubmit = () => {
+    const contract = process.env.CONTRACT
+    const { config } = usePrepareSendTransaction({
+        request: {
+            to: contract,
+            value: amount ? ethers.utils.parseEther(amount) : undefined,
+        },
+    })
+    const { sendTransaction } = useSendTransaction(config)
+
+    const HandleSubmit = () => {
         //soumettre la transaction avec le prix
         setPictureModal(false)
-        console.log(`${askingPrice} USDT, url: ${url}`)
+        console.log(`${amount} USDT, url: ${url}`)
+        sendTransaction?.()
+        toast("NFT Request submitted!", {
+            icon: "🦄",
+            position: toast.POSITION.TOP_LEFT,
+            theme: 'dark'
+        })
+        setAmount('')
     }
 
     return (
@@ -58,13 +81,17 @@ const HomePage = () => {
                         <Col sm={3}></Col>
                         <Col sm={1}>with </Col>
                         <Col sm={2}>
-                            <Form.Control placeholder="USDT" onChange={handlePrice} />
+                            <Form.Control
+                                placeholder="USDT"
+                                onChange={(e) => { setAmount(e.target.value) }}
+                                value={amount}
+                            />
                             <Form.Text className="text-muted">
                                 5 USDT min!
                             </Form.Text>
                         </Col>
                         <Col sm={3}>
-                            you're <b>123rd</b> on pending list
+                            you're <b>{listPosition}</b> on pending list
                         </Col>
                         <Col sm={1}>
                             <Button variant="flat" onClick={handleBuy}><b>Buy!</b></Button>
@@ -74,11 +101,11 @@ const HomePage = () => {
                 </Form.Group>
             </Form>
             <br /><br />
-            <h1>1245 portraits</h1>
+            <h1>{totalNFT} portraits</h1>
             <h4>already ordered</h4>
             <NftList />
 
-            <Modal show={PriceModal} onHide={handleClose}>
+            <Modal show={wrongPriceModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Wrong Price</Modal.Title>
                 </Modal.Header>
@@ -90,7 +117,7 @@ const HomePage = () => {
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={PictureModal} onHide={handleClose}>
+            <Modal show={pictureModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>URL of your picture</Modal.Title>
                 </Modal.Header>
@@ -108,11 +135,25 @@ const HomePage = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleSubmit}>
+                    <Button variant="primary" onClick={HandleSubmit}>
                         Submit
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <ToastContainer />
+
+            <Modal show={notConnectedModal} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Please Connect!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>You have to be connected for buying!</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
         </Container>
     )
 }

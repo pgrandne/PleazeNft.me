@@ -1,21 +1,54 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { ConnectKitButton } from "connectkit";
+import { ConnectKitButton } from 'connectkit';
+import { LinkContainer } from 'react-router-bootstrap'
+import { useNetwork, useSwitchNetwork } from 'wagmi';
+import { useEffect, useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const Header = () => {
+    const [networkModal, setNetworkModal] = useState(false)
+
+    const { chain } = useNetwork()
+    const { switchNetwork } = useSwitchNetwork()
+
+    useEffect(() => {
+        if (chain && chain.id !== 80001) setNetworkModal(true);
+    }, [chain]);
+
+    const switchnetwork = () => {
+        switchNetwork(80001)
+        setNetworkModal(false)
+
+    }
+
+
 
     return (
         <Navbar color="white" variant="dark">
             <Container>
-                <Navbar.Brand className="Brand" href="#home">PLZNFT.ME</Navbar.Brand>
+                <LinkContainer to="/"><Navbar.Brand className="Brand">PLZNFT.ME</Navbar.Brand></LinkContainer>
                 <Nav className="justify-content-end">
-                    <Nav.Link href="#about">WTF is this?</Nav.Link>
-                    <Nav.Link href="#list">Queue</Nav.Link>
+                    <LinkContainer to="/wtf"><Nav.Link>WTF is this?</Nav.Link></LinkContainer>
+                    <LinkContainer to="queue"><Nav.Link>Queue</Nav.Link></LinkContainer>
                     <ConnectKitButton />
+                    {chain &&
+                        <Modal show={networkModal} onHide={() => { setNetworkModal(false) }}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Wrong Network</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>You are connected on {chain.name}!<br />Only Polygon Mumbai is supported</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="primary" onClick={switchnetwork}>
+                                    Change Network
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>}
                 </Nav>
-            </Container>
-        </Navbar>
+            </Container >
+        </Navbar >
     )
 }
 
