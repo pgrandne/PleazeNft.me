@@ -12,7 +12,7 @@ const Header = () => {
     const [networkModal, setNetworkModal] = useState(false)
 
     const { chain } = useNetwork()
-    const { switchNetwork } = useSwitchNetwork()
+    const { error, isLoading, pendingChainId, switchNetwork } = useSwitchNetwork()
 
     useEffect(() => {
         if (chain && chain.id !== 80001) setNetworkModal(true);
@@ -20,6 +20,9 @@ const Header = () => {
 
     const switchnetwork = () => {
         switchNetwork(80001)
+        console.log("error " + error)
+        console.log("loading " + isLoading)
+        console.log("pending " + pendingChainId)
         setNetworkModal(false)
 
     }

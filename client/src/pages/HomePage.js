@@ -101,13 +101,13 @@ const HomePage = () => {
                         <Col sm={1}>with </Col>
                         <Col sm={2}>
                             <Form.Control
-                                placeholder="USDT"
+                                placeholder="MATIC"
                                 type="number"
                                 onChange={(e) => { setAmount(e.target.value) }}
                                 value={amount}
                             />
                             <Form.Text className="text-muted">
-                                5 USDT min!
+                                0.01 MATIC min!
                             </Form.Text>
                         </Col>
                         <TotalPosition />

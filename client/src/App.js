@@ -8,6 +8,8 @@ import { WagmiConfig, createClient, chain } from "wagmi";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
 import { Buffer } from "buffer";
 import { Route, Routes } from 'react-router-dom';
+import Button from "react-bootstrap/Button";
+import Modal from 'react-bootstrap/Modal';
 
 const alchemyId = process.env.REACT_APP_ALCHEMY_ID;
 
@@ -23,7 +25,11 @@ const client = createClient(
   }),
 );
 
+
 const App = () => {
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
   return (
 
     <WagmiConfig client={client}>
@@ -31,6 +37,7 @@ const App = () => {
         <div className="App">
           <Header />
           <br /><br /><br />
+          {isMobile() && <p>Mobile device is not supported, please use desktop device</p>}
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="wtf" element={<WtfPage />} />
@@ -40,10 +47,6 @@ const App = () => {
         </div>
       </ConnectKitProvider>
     </WagmiConfig >
-
-
-
-
   );
 }
 

@@ -14,7 +14,7 @@ const QueuePage = () => {
 
     const hexToDate = (hex) => {
         const requestDate = new Date(parseInt(data[0][2]['_hex']) * 1000)
-        return requestDate.toISOString()
+        return requestDate.toISOString().substring(0, 10)
     }
 
     return (
@@ -25,7 +25,7 @@ const QueuePage = () => {
                     <tr>
                         <th>Id Request</th>
                         <th>Address</th>
-                        <th>Timestamp</th>
+                        <th>Date Request</th>
                         <th>Deposit</th>
                         <th>NFT Received</th>
                     </tr>
@@ -34,7 +34,7 @@ const QueuePage = () => {
                 <tbody>
                     {data && data.map((item, i) => (
                         <tr key={i}>
-                            <td>{parseInt(item[0]['_hex'])}</td>
+                            <td>{parseInt(item[0]['_hex']) + 1}</td>
                             <td>{truncateEthAddress(item[1])}</td>
                             <td>{hexToDate(item[2]['_hex'])}</td>
                             <td>{(parseInt(item[3]['_hex']) / Math.pow(10, 18))}</td>
