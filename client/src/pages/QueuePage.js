@@ -9,13 +9,26 @@ const QueuePage = () => {
     const { data } = useContractRead({
         addressOrName: contract,
         contractInterface: ABI,
-        functionName: 'getAllRequests()',
+        functionName: 'getAllRequests',
     })
+
+    const { data2 } = useContractRead({
+        addressOrName: contract,
+        contractInterface: ABI,
+        functionName: 'balanceOfApplicant',
+        args: "0x2444bADfA76CbC3076DC5FE8DB2adF65950E7ebF"
+    })
+    console.log(data2)
+
 
     const hexToDate = (hex) => {
         const requestDate = new Date(parseInt(data[0][2]['_hex']) * 1000)
         return requestDate.toISOString().substring(0, 10)
     }
+
+
+
+
 
     return (
         <Container>

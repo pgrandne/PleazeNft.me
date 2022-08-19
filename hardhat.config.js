@@ -27,7 +27,7 @@ module.exports = {
     apiKey: process.env.POLYGONSCAN_API_KEY
   },
   solidity: {
-    version: "0.8.0",
+    version: "0.8.16",
     settings: {
       optimizer: {
         enabled: true,

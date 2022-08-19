@@ -12,6 +12,7 @@ const WtfPage = () => {
             <p>The minimum amount is 5 Matic, much more the deposit is important, much more you have the priority</p>
             <p>We respect yout privacy, the url that you sent is not stored on the blockchain, we just use it for creating the FNT and delete it after that</p>
             <p>However all the NFT created are apparent on the Home Page</p>
+            <p>You cannot request a new NFT if you have a pending request, it is only one by one</p>
             <p>PleazeNft.Me uses Polygon Network</p>
             <p></p>
             <br /><br />
