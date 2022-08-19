@@ -43,7 +43,10 @@ const QueuePage = () => {
                     ))}
                 </tbody>
             </Table>
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <br /><br />
+            <p>The address of the smart contract is : 0x1aD037Edc7758114FC80753DA2DBF246e14AdaED</p>
+            <p>You can check all information by clicking on this <a href="https://mumbai.polygonscan.com/address/0x1aD037Edc7758114FC80753DA2DBF246e14AdaED">link (polygon scan)</a></p>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         </Container>
     )
 }
