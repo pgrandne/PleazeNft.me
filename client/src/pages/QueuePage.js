@@ -20,11 +20,11 @@ const QueuePage = () => {
     return (
         <Container>
             <h3>Queue Page</h3><br />
-            <Table striped bordered hover variant="dark">
+            <Table responsive striped bordered hover variant="dark">
                 <thead>
                     <tr>
                         <th>Id Request</th>
-                        <th>Addresss</th>
+                        <th>Address</th>
                         <th>Timestamp</th>
                         <th>Deposit</th>
                         <th>NFT Received</th>
