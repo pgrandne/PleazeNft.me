@@ -81,11 +81,7 @@ contract PleazeNftMe2 {
         return (success);
     }
 
-    function getStatus() public view returns (RequestsList[] memory) {
-        return requestsList;
-    }
-
-    //If you didn't receive your NFt after 15 days, you can get back your deposit
+    //If you didn't receive your NFT after 15 days, you can get back your deposit
     function getDepositBack() public payable returns (bool) {
         require(_status[msg.sender] == 1, "You have no deposit");
         require(
@@ -104,7 +100,56 @@ contract PleazeNftMe2 {
         return (success);
     }
 
-    function getBalance() external view returns (uint256) {
+    //VIEW FUNCTIONS
+    //ONLY READING
+
+    function getAllRequests() public view returns (RequestsList[] memory) {
+        return requestsList;
+    }
+
+    function getAllPendingRequests()
+        public
+        view
+        returns (RequestsList[] memory)
+    {
+        RequestsList[] memory pendingRequests;
+        for (uint i = 0; i < idCounter; i++) {
+            if (_status[requestsList[i].addressApplicant] == 1)
+                pendingRequests.push(RequestsList(requestsList[i]));
+        }
+        return pendingRequests;
+    }
+
+    function getContractBalance() public view returns (uint) {
+        require(msg.sender == owner, "Only the owner can call this function");
         return address(this).balance;
+    }
+
+    function getRequest() public view returns (uint, RequestsList memory) {
+        uint status;
+        RequestsList memory applicantRequest;
+
+        for (uint i = 0; i < idCounter; i++) {
+            if (requestsList[i].addressApplicant == msg.sender) {
+                status = _status(msg.sender);
+                applicantRequest = requestsList[i];
+                break;
+            }
+        }
+        return (status, applicantRequest);
+    }
+
+    function getWithdrawDate() public view returns (string) {
+        if (_status[msg.sender] = '1') {
+                for (uint i = 0; i < idCounter; i++) {
+            if (requestsList[i].addressApplicant == msg.sender) {
+                status = _status(msg.sender);
+                applicantRequest = requestsList[i];
+                break;
+            }
+        }
+        return
+
+
     }
 }
