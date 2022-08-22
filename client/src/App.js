@@ -19,7 +19,7 @@ if (!window.Buffer) window.Buffer = Buffer;
 
 const client = createClient(
   getDefaultClient({
-    appName: "PleazeNftMe",
+    appName: "PlzNftMe",
     alchemyId,
     chains,
   }),
