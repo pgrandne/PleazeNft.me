@@ -20,6 +20,19 @@ const GetMyRequest = () => {
 
     const { address } = useAccount()
 
+    const status = (value) => {
+        switch (value) {
+            case 1:
+                return "NFT Requested";
+            case 2:
+                return "NFT sent";
+            case 3:
+                return "Deposit withdraw";
+            default:
+                return "No request";
+        }
+    }
+
     return (
         <Table responsive striped bordered hover variant="dark">
             <thead>
@@ -28,6 +41,7 @@ const GetMyRequest = () => {
                     <th>Address</th>
                     <th>Date Request</th>
                     <th>Deposit</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +51,7 @@ const GetMyRequest = () => {
                         <td>{truncateEthAddress(item[1])}</td>
                         <td>{hexToDate(item[2]['_hex'])}</td>
                         <td>{(parseInt(item[3]['_hex']) / Math.pow(10, 18))}</td>
+                        <td>{status(parseInt(item[4]['_hex']))}</td>
                     </tr>
                 ))}
             </tbody>

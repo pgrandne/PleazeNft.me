@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 import NftList from "../components/NftList";
 import TotalPosition from "../components/TotalPosition";
+import TotalNFT from "../components/TotalNFT";
 import 'react-toastify/dist/ReactToastify.css';
 import { ethers } from "ethers";
 import { useAccount, useWaitForTransaction, useContractWrite, usePrepareContractWrite } from 'wagmi';
@@ -24,7 +25,7 @@ const HomePage = () => {
     const [debouncedAmount] = useDebounce(amount, 500)
 
     const { address, isConnected } = useAccount()
-    let totalNFT = 1
+    let totalNFT = 0
 
     const form = useRef();
 
@@ -135,9 +136,7 @@ const HomePage = () => {
             </Form>
             <br /><br />
 
-            <h1>{totalNFT} portraits</h1>
-            <h4>already ordered</h4>
-
+            <TotalNFT />
             {/* Display all the NFT already created */}
             <NftList />
 

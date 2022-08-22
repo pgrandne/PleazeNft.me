@@ -1,2 +1,2 @@
-const contract = "0xa5E96461117266E8b87a5476E900b6eCf6E01Dfd";
+const contract = "0xe7CfA2f153b3C99CBeaC2f5aea9c3aFC34EE0654";
 export default contract;

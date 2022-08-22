@@ -19,7 +19,7 @@ const NftList = () => {
                         />
                     </Figure>
                 </Col>
-                <Col>
+                {/* <Col>
                     <Figure>
                         <Figure.Image
                             width={171}
@@ -38,81 +38,8 @@ const NftList = () => {
                             src={num3}
                         />
                     </Figure>
-                </Col>
-                <Col>
-                    <Figure>
-                        <Figure.Image
-                            width={171}
-                            height={180}
-                            alt="171x180"
-                            src={num1}
-                        />
-                    </Figure>
-                </Col>
-                <Col>
-                    <Figure>
-                        <Figure.Image
-                            width={171}
-                            height={180}
-                            alt="171x180"
-                            src={num2}
-                        />
-                    </Figure>
-                </Col>
+                </Col> */}
             </Row>
-            <Row>
-                <Col>
-                    <Figure>
-                        <Figure.Image
-                            width={171}
-                            height={180}
-                            alt="171x180"
-                            src={num3}
-                        />
-                    </Figure>
-                </Col>
-                <Col>
-                    <Figure>
-                        <Figure.Image
-                            width={171}
-                            height={180}
-                            alt="171x180"
-                            src={num1}
-                        />
-                    </Figure>
-                </Col>
-                <Col>
-                    <Figure>
-                        <Figure.Image
-                            width={171}
-                            height={180}
-                            alt="171x180"
-                            src={num2}
-                        />
-                    </Figure>
-                </Col>
-                <Col>
-                    <Figure>
-                        <Figure.Image
-                            width={171}
-                            height={180}
-                            alt="171x180"
-                            src={num3}
-                        />
-                    </Figure>
-                </Col>
-                <Col>
-                    <Figure>
-                        <Figure.Image
-                            width={171}
-                            height={180}
-                            alt="171x180"
-                            src={num1}
-                        />
-                    </Figure>
-                </Col>
-            </Row>
-
         </div>
     )
 }

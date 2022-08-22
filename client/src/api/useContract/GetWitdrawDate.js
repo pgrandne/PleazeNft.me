@@ -16,8 +16,12 @@ const GetWithdrawDate = () => {
         return (requestDate.toISOString().substring(0, 10) + " " + requestDate.toISOString().substring(11, 19))
     }
 
+    console.log(data)
     return (
-        <p>You can get back your deposit at : {hexToDate(data)}</p>
+        <div>
+            {(data !== undefined) && <p>You can get back your deposit at : {hexToDate(data)}</p>}
+            {(data === undefined) && <p>No deposit to withdraw</p>}
+        </div>
     )
 
 }

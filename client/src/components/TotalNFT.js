@@ -1,11 +1,10 @@
 import { useContractRead } from 'wagmi';
-import Col from 'react-bootstrap/Col';
 import ABI from '../api/ABI.json';
 import contract from '../api/contract';
 import { useState, useEffect } from 'react';
 
 
-const TotalPosition = () => {
+const TotalNFT = () => {
 
     const [total, setTotal] = useState('0');
 
@@ -20,18 +19,18 @@ const TotalPosition = () => {
             let dataFiltered = [];
             let dataFiltered2 = [];
             for (let i = 0; i < data.length; i++) {
-                dataFiltered.push([parseInt(data[i][4]['_hex'])]);
+                dataFiltered.push(parseInt(data[i][4]['_hex']));
             }
-            dataFiltered2 = dataFiltered.filter(item => dataFiltered[item] === 1)
-            setTotal(dataFiltered2.length + 1)
+            dataFiltered2 = dataFiltered.filter(item => dataFiltered[item] !== 1)
+            setTotal(dataFiltered2.length)
         }
     }, [data, isSuccess])
 
     return (
-        <Col sm={3}>
-            you're <b>{isSuccess && total}</b> on pending list
-        </Col>
+        <>
+            <h1>{total} portraits</h1>
+            <h4>already ordered</h4>
+        </>
     )
 }
-
-export default TotalPosition;
+export default TotalNFT;

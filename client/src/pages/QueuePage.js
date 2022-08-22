@@ -17,18 +17,23 @@ const QueuePage = () => {
         return requestDate.toISOString().substring(0, 10)
     }
 
-    let dataFormated = [];
+    let dataFormated = [[]];
     for (let i = 0; i < data.length; i++) {
         dataFormated.push([
             parseInt(data[i][0]['_hex']),
             truncateEthAddress(data[i][1]),
             hexToDate(data[i][2]['_hex']),
-            parseInt(data[i][3]['_hex'])
+            parseInt(data[i][3]['_hex']),
+            parseInt(data[i][4]['_hex'])
         ])
     }
 
     let dataFiltered = []
-    dataFiltered = dataFormated.sort((a, b) => a[3] < b[3])
+    let dataFiltered2 = []
+    if (dataFormated.length > 1) dataFiltered = dataFormated.sort((a, b) => a[3] < b[3])
+    else dataFiltered = dataFormated
+
+    dataFiltered2 = dataFiltered.filter(item => item[4] === 1);
 
     return (
         <Container>
@@ -44,7 +49,7 @@ const QueuePage = () => {
                 </thead>
 
                 <tbody>
-                    {data && dataFiltered.map((item) => (
+                    {data && dataFiltered2.map((item) => (
                         <tr key={item}>
                             <td>{item[0]}</td>
                             <td>{item[1]}</td>
