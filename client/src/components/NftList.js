@@ -29,7 +29,7 @@ const NftList = () => {
                         />
                     </Figure>
                 </Col>
-                {/* <Col>
+                <Col>
                     <Figure>
                         <Figure.Image
                             width={171}
@@ -38,7 +38,7 @@ const NftList = () => {
                             src={num3}
                         />
                     </Figure>
-                </Col> */}
+                </Col>
             </Row>
         </div>
     )
