@@ -1,7 +1,9 @@
+import Container from "react-bootstrap/Container";
+
 const WtfPage = () => {
     return (
-        <div>
-            <h3>Wtf Page</h3><br />
+        <Container className='text-left'>
+            <h3>Rules</h3><br />
             <p>PleazeNftMe allows you to get a picture of you drawn by an artist</p>
             <p>This drawing is based on an picture of you that you provide by an url (facebook, instragram, ...)</p>
             <p>From this picture, we will create a sketch of you an send you by an NFT</p>
@@ -16,7 +18,7 @@ const WtfPage = () => {
             <p>PleazeNft.Me uses Polygon Network</p>
             <p></p>
             <br /><br />
-        </div>
+        </Container>
     )
 }
 

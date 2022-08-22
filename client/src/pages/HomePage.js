@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
@@ -12,7 +12,9 @@ import { ethers } from "ethers";
 import { useAccount, useWaitForTransaction, useContractWrite, usePrepareContractWrite } from 'wagmi';
 import { ToastContainer, toast } from 'react-toastify';
 import ABI from '../api/ABI.json';
-import { useDebounce } from 'use-debounce'
+import { useDebounce } from 'use-debounce';
+import contract from '../api/contract';
+import emailjs from '@emailjs/browser';
 
 const HomePage = () => {
     const [wrongPriceModal, setWrongPriceModal] = useState(false);
@@ -20,12 +22,25 @@ const HomePage = () => {
     const [notConnectedModal, setNotConnectedModal] = useState(false);
     const [amount, setAmount] = useState('');
     const [debouncedAmount] = useDebounce(amount, 500)
-    const [pictureUrl, setPictureUrl] = useState('');
 
-    const { isConnected } = useAccount()
-    let listPosition = 1
+    const { address, isConnected } = useAccount()
     let totalNFT = 1
-    const contract = "0x1aD037Edc7758114FC80753DA2DBF246e14AdaED"
+
+    const form = useRef();
+
+    const sendTransaction = (e) => {
+        e.preventDefault();
+        write?.()
+        setTransactionModal(false);
+
+        emailjs.sendForm('service_3lobq7o', 'template_olmr7mi', form.current, 'fdpNV8teobG5EqCjq')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+    };
+
 
     const handleBuy = () => {
         if (isConnected) {
@@ -158,33 +173,24 @@ const HomePage = () => {
                     <Modal.Title>URL of your picture</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+
+                    <Form ref={form} onSubmit={sendTransaction}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Your address</Form.Label>
+                            <Form.Control readOnly type="text" name="address" defaultValue={address} />
                             <Form.Label>Please fill in with an URL of a picture of you</Form.Label>
-                            <Form.Control
-                                type="input"
-                                placeholder="https://www.instagram.com/johnjohndoe/"
-                                autoFocus
-                                onChange={(e) => { setPictureUrl(e.target.value) }}
-                            />
+                            <Form.Control type="text" name="url" required /><br />
+                            <Button variant="primary" type="submit">Submit</Button>
                         </Form.Group>
                     </Form>
+
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={(e) => {
-                        e.preventDefault()
-                        write?.()
-                        setTransactionModal(false)
-                    }}
-                    >
-                        Submit
-                    </Button>
-                </Modal.Footer>
+
             </Modal>
 
             {/* For notification of transactions */}
             <ToastContainer />
-        </Container>
+        </Container >
     )
 }
 

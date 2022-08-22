@@ -60,6 +60,7 @@ contract PleazeNftMe2 {
         );
         _status[msg.sender] = 1;
         _requestTime[msg.sender] = block.timestamp;
+        idCounter++;
     }
 
     //Withdraw all the deposits associated to provided NFT
@@ -107,19 +108,6 @@ contract PleazeNftMe2 {
         return requestsList;
     }
 
-    function getAllPendingRequests()
-        public
-        view
-        returns (RequestsList[] memory)
-    {
-        RequestsList[] memory pendingRequests;
-        for (uint i = 0; i < idCounter; i++) {
-            if (_status[requestsList[i].addressApplicant] == 1)
-                pendingRequests.push(RequestsList(requestsList[i]));
-        }
-        return pendingRequests;
-    }
-
     function getContractBalance() public view returns (uint) {
         require(msg.sender == owner, "Only the owner can call this function");
         return address(this).balance;
@@ -131,7 +119,7 @@ contract PleazeNftMe2 {
 
         for (uint i = 0; i < idCounter; i++) {
             if (requestsList[i].addressApplicant == msg.sender) {
-                status = _status(msg.sender);
+                status = _status[msg.sender];
                 applicantRequest = requestsList[i];
                 break;
             }
@@ -139,17 +127,8 @@ contract PleazeNftMe2 {
         return (status, applicantRequest);
     }
 
-    function getWithdrawDate() public view returns (string) {
-        if (_status[msg.sender] = '1') {
-                for (uint i = 0; i < idCounter; i++) {
-            if (requestsList[i].addressApplicant == msg.sender) {
-                status = _status(msg.sender);
-                applicantRequest = requestsList[i];
-                break;
-            }
-        }
-        return
-
-
+    function getWithdrawDate() public view returns (uint) {
+        require(_status[msg.sender] == 1, "You have no pending request");
+        return (_requestTime[msg.sender] + 15 days);
     }
 }

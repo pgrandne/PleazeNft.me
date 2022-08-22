@@ -3,13 +3,13 @@ import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import WtfPage from './pages/WtfPage';
 import QueuePage from './pages/QueuePage';
+import Account from './pages/Account';
+import Admin from './pages/Admin';
 import Footer from './components/Footer';
 import { WagmiConfig, createClient, chain } from "wagmi";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
 import { Buffer } from "buffer";
 import { Route, Routes } from 'react-router-dom';
-import Button from "react-bootstrap/Button";
-import Modal from 'react-bootstrap/Modal';
 
 const alchemyId = process.env.REACT_APP_ALCHEMY_ID;
 
@@ -25,13 +25,12 @@ const client = createClient(
   }),
 );
 
-
 const App = () => {
   const isMobile = () => {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
-  return (
 
+  return (
     <WagmiConfig client={client}>
       <ConnectKitProvider theme="midnight">
         <div className="App">
@@ -42,6 +41,8 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="wtf" element={<WtfPage />} />
             <Route path="queue" element={<QueuePage />} />
+            <Route path="account" element={<Account />} />
+            <Route path="admin" element={<Admin />} />
           </Routes>
           <Footer />
         </div>

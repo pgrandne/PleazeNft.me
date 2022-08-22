@@ -1,17 +1,22 @@
 [
     {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
         "anonymous": false,
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "bytes32",
-                "name": "nftID",
-                "type": "bytes32"
+                "internalType": "uint256",
+                "name": "idrRequest",
+                "type": "uint256"
             },
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "applicantAddress",
+                "name": "addressApplicant",
                 "type": "address"
             },
             {
@@ -25,73 +30,10 @@
                 "internalType": "uint256",
                 "name": "deposit",
                 "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "dataCID",
-                "type": "string"
             }
         ],
         "name": "NewNftRequested",
         "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "previousOwner",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
-            }
-        ],
-        "name": "OwnershipTransferred",
-        "type": "event"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "addressToNft",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "balanceOfApplicant",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
     },
     {
         "inputs": [],
@@ -108,12 +50,12 @@
                 "components": [
                     {
                         "internalType": "uint256",
-                        "name": "nftId",
+                        "name": "idRequest",
                         "type": "uint256"
                     },
                     {
                         "internalType": "address",
-                        "name": "applicantAddress",
+                        "name": "addressApplicant",
                         "type": "address"
                     },
                     {
@@ -130,14 +72,9 @@
                         "internalType": "string",
                         "name": "dataCID",
                         "type": "string"
-                    },
-                    {
-                        "internalType": "bool",
-                        "name": "nftNotSent",
-                        "type": "bool"
                     }
                 ],
-                "internalType": "struct PleazeNftMe.RequestsList[]",
+                "internalType": "struct PleazeNftMe2.RequestsList[]",
                 "name": "",
                 "type": "tuple[]"
             }
@@ -147,7 +84,7 @@
     },
     {
         "inputs": [],
-        "name": "getBalance",
+        "name": "getContractBalance",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -160,12 +97,57 @@
     },
     {
         "inputs": [],
-        "name": "owner",
+        "name": "getDepositBack",
         "outputs": [
             {
-                "internalType": "address",
+                "internalType": "bool",
                 "name": "",
-                "type": "address"
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getRequest",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "idRequest",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "addressApplicant",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "creationTimestamp",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "deposit",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "dataCID",
+                        "type": "string"
+                    }
+                ],
+                "internalType": "struct PleazeNftMe2.RequestsList",
+                "name": "",
+                "type": "tuple"
             }
         ],
         "stateMutability": "view",
@@ -173,18 +155,11 @@
     },
     {
         "inputs": [],
-        "name": "renounceOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "tokenIdCounter",
+        "name": "getWithdrawDate",
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "_value",
+                "name": "",
                 "type": "uint256"
             }
         ],
@@ -192,16 +167,16 @@
         "type": "function"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "withdraw",
+        "outputs": [
             {
-                "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
             }
         ],
-        "name": "transferOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "payable",
         "type": "function"
     },
     {

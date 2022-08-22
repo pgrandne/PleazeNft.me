@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { ConnectKitButton } from 'connectkit';
 import { LinkContainer } from 'react-router-bootstrap'
-import { useNetwork, useSwitchNetwork } from 'wagmi';
+import { useNetwork, useSwitchNetwork, useAccount } from 'wagmi';
 import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +13,7 @@ const Header = () => {
 
     const { chain } = useNetwork()
     const { error, isLoading, pendingChainId, switchNetwork } = useSwitchNetwork()
+    const { address, isConnected } = useAccount()
 
     useEffect(() => {
         if (chain && chain.id !== 80001) setNetworkModal(true);
@@ -36,6 +37,10 @@ const Header = () => {
                 <Nav className="justify-content-end">
                     <LinkContainer to="/wtf"><Nav.Link>WTF is this?</Nav.Link></LinkContainer>
                     <LinkContainer to="queue"><Nav.Link>Queue</Nav.Link></LinkContainer>
+                    {isConnected && address !== "0x2444bADfA76CbC3076DC5FE8DB2adF65950E7ebF" &&
+                        <LinkContainer to="account"><Nav.Link>Account</Nav.Link></LinkContainer>}
+                    {isConnected && address === "0x2444bADfA76CbC3076DC5FE8DB2adF65950E7ebF" &&
+                        < LinkContainer to="admin"><Nav.Link>Admin</Nav.Link></LinkContainer>}
                     <ConnectKitButton />
                     {chain &&
                         <Modal show={networkModal} onHide={() => { setNetworkModal(false) }}>

@@ -1,22 +1,23 @@
 import { useContractRead } from 'wagmi';
 import Col from 'react-bootstrap/Col';
 import ABI from '../api/ABI.json';
+import contract from '../api/contract';
 import { useState, useEffect } from 'react';
+
 
 const TotalPosition = () => {
 
     const [total, setTotal] = useState('0');
 
-    const contract = "0x1aD037Edc7758114FC80753DA2DBF246e14AdaED"
     const { data, isSuccess } = useContractRead({
         addressOrName: contract,
         contractInterface: ABI,
-        functionName: 'getAllRequests()',
+        functionName: 'getAllRequests',
     })
 
     useEffect(() => {
-        setTotal(data.length + 1)
-    }, [])
+        if (isSuccess) setTotal(data.length + 1)
+    }, [data.length, isSuccess])
 
     return (
         <Col sm={3}>
