@@ -24,7 +24,6 @@ const TotalPosition = () => {
             }
             dataFiltered2 = dataFiltered.filter(item => dataFiltered[item] === 1)
             setTotal(dataFiltered2.length + 1)
-            console.log(dataFiltered2.length)
         }
     }, [data, isSuccess])
 
