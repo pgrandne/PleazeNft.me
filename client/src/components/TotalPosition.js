@@ -20,16 +20,17 @@ const TotalPosition = () => {
             let dataFiltered = [];
             let dataFiltered2 = [];
             for (let i = 0; i < data.length; i++) {
-                dataFiltered.push([parseInt(data[i][4]['_hex'])]);
+                dataFiltered.push(parseInt(data[i][4]['_hex']));
             }
             dataFiltered2 = dataFiltered.filter(item => dataFiltered[item] === 1)
             setTotal(dataFiltered2.length + 1)
+            console.log(dataFiltered2.length)
         }
     }, [data, isSuccess])
 
     return (
         <Col sm={3}>
-            you're <b>{isSuccess && total}</b> on pending list
+            you're <b>{total}</b> on pending list
         </Col>
     )
 }
