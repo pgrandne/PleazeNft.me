@@ -16,10 +16,11 @@ const MintNFT = () => {
         addressOrName: contract,
         contractInterface: ABI,
         functionName: 'mintTo',
-        args: [recipient],
+        args: recipient,
     })
     const { isLoading, isSuccess, isError, write } = useContractWrite(config)
 
+    console.log(isLoading)
     //Generate a notifcation based on transaction status 
     useEffect(() => {
         if (isLoading) {
@@ -55,7 +56,7 @@ const MintNFT = () => {
                         placeholder="Address for minting NFT"
                         aria-label="address"
                         aria-describedby="basic-addon1"
-                        onChange={(e) => { setRecipient(e.target.Value) }}
+                        onChange={(e) => { setRecipient(e.target.value) }}
                     />
                 </Col>
                 <Col sm={3}></Col>

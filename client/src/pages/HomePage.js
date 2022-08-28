@@ -25,7 +25,6 @@ const HomePage = () => {
     const [debouncedAmount] = useDebounce(amount, 500)
 
     const { address, isConnected } = useAccount()
-    let totalNFT = 0
 
     const form = useRef();
 
@@ -136,7 +135,7 @@ const HomePage = () => {
             </Form>
             <br /><br />
 
-            <TotalNFT />
+            <TotalNFT /><br />
             {/* Display all the NFT already created */}
             <NftList />
 

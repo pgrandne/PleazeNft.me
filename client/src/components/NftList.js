@@ -4,6 +4,7 @@ import Figure from 'react-bootstrap/Figure';
 import num1 from '../images/1.png'
 import num2 from '../images/2.png'
 import num3 from '../images/3.png'
+import num4 from '../images/4.png'
 
 const NftList = () => {
     return (
@@ -36,6 +37,16 @@ const NftList = () => {
                             height={180}
                             alt="171x180"
                             src={num3}
+                        />
+                    </Figure>
+                </Col>
+                <Col>
+                    <Figure>
+                        <Figure.Image
+                            width={171}
+                            height={180}
+                            alt="171x180"
+                            src={num4}
                         />
                     </Figure>
                 </Col>
